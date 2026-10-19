@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 API_KEY= os.getenv("GEMINI_API_KEY")
-MODELO= "gemini-flash-latest"
+MODELO= "gemini-3.6-flash"
 URL_BASE= "https://generativelanguage.googleapis.com/v1beta/models/"
 
 def armar_peticion(pregunta):
@@ -44,10 +44,21 @@ def extraer_textos(datos):
 def obtener_dato_de_prueba(pregunta):
     url, body= armar_peticion(pregunta)
     datos= enviar_peticion(url, body)
+    costo= calcular_costo(datos, 0.00000075, 0.00000375)
+    print(f"Costo de la operación: ${costo:.6f} USD")
     return extraer_textos(datos)
+
+def calcular_costo(datos, precio_entrada, precio_salida):
+    uso= datos["usageMetadata"]
+    tokens_entrada= uso["promptTokenCount"]
+    tokens_salida= uso["candidatesTokenCount"]
+    tokens_razonamiento= uso["thoughtsTokenCount"]
+    costo= (tokens_entrada * precio_entrada) + ((tokens_salida + tokens_razonamiento) * precio_salida)
+    return costo
 
 try:
     print(obtener_dato_de_prueba("¿Cuál es la capital de Francia?"))
+
 
 except (ValueError, RuntimeError) as error:
     print(f"No se pudo completar la operación: {error}")
