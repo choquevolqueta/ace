@@ -57,7 +57,7 @@ def calcular_costo(datos, precio_entrada, precio_salida):
     return costo
 
 try:
-    print(obtener_dato_de_prueba("¿Cuál es la capital de Francia?"))
+    print(obtener_dato_de_prueba("¿hazme un resumen de bukarin y su concepto de materialismo historico?"))
 
 
 except (ValueError, RuntimeError) as error:
