@@ -1,0 +1,60 @@
+$ python src/evaluacion_modelos.py 
+======================================================================
+Evaluando modelo: deepseek-flash
+======================================================================
+
+repeticion 1 de 4 deepseek-flash---
+latencia: 4.04 segundos
+Costo de la operación: $0.000133 USD
+Respuesta: La Plaza Murillo está ubicada en el **centro histórico de La Paz, Bolivia**, muy cerca del Palacio Quemado y la Catedral Metropolitana. Es una de las plazas principales de la ciudad.
+
+repeticion 2 de 4 deepseek-flash---
+latencia: 3.03 segundos
+Costo de la operación: $0.000150 USD
+Respuesta: La Plaza Murillo está ubicada en el **centro histórico de La Paz, Bolivia**, cerca del Palacio de Gobierno, la Catedral Metropolitana y el Congreso Nacional. Es uno de los principales espacios públicos de la ciudad.
+
+repeticion 3 de 4 deepseek-flash---
+latencia: 3.12 segundos
+Costo de la operación: $0.000148 USD
+Respuesta: La Plaza Murillo está ubicada en el centro histórico de **La Paz, Bolivia**, cerca del Palacio de Gobierno (Palacio Quemado), la Catedral Metropolitana y el Congreso Nacional.
+
+repeticion 4 de 4 deepseek-flash---
+latencia: 3.68 segundos
+Costo de la operación: $0.000271 USD
+Respuesta: La Plaza Murillo está ubicada en el **centro histórico de La Paz, Bolivia**. Es la plaza principal de laciudad, rodeada por edificios como la Catedral Metropolitana, el Palacio Quemado y el Palacio Legislativo.
+
+----------------------------------------------------------------------
+resumen deepseek-flash:
+Latencia promedio: 3.47 segundos
+Costo total de las operaciones: $0.000703 USD
+----------------------------------------------------------------------
+
+======================================================================
+Evaluando modelo: deepseek-v4-pro
+======================================================================
+
+repeticion 1 de 4 deepseek-v4-pro---
+latencia: 10.18 segundos
+Costo de la operación: $0.001612 USD
+Respuesta: La Plaza Murillo está ubicada en el centro histórico de **La Paz, Bolivia**. Es la plaza principal de laciudad y está rodeada por el Palacio de Gobierno, la Catedral Metropolitana y el Palacio Legislativo.
+
+repeticion 2 de 4 deepseek-v4-pro---
+latencia: 6.96 segundos
+Costo de la operación: $0.000587 USD
+Respuesta: La Plaza Murillo está ubicada en el centro histórico de la ciudad de **La Paz, Bolivia**. Es la plaza principal de la ciudad y está rodeada por importantes edificios como el Palacio de Gobierno, la Catedral Metropolitanay la Asamblea Legislativa Plurinacional.
+
+repeticion 3 de 4 deepseek-v4-pro---
+latencia: 7.52 segundos
+Costo de la operación: $0.000527 USD
+Respuesta: La Plaza Murillo está ubicada en el centro histórico de **La Paz, Bolivia**. Es la plaza principal de laciudad y alberga edificios como el Palacio de Gobierno, la Asamblea Legislativa y la Catedral Metropolitana.
+
+repeticion 4 de 4 deepseek-v4-pro---
+latencia: 12.82 segundos
+Costo de la operación: $0.000666 USD
+Respuesta: La Plaza Murillo está ubicada en el centro histórico de **La Paz, Bolivia**. Es la plaza principal de laciudad y está rodeada por edificios importantes como el **Palacio de Gobierno**, la **Catedral Metropolitana** y la**Asamblea Legislativa Plurinacional**.
+
+----------------------------------------------------------------------
+resumen deepseek-v4-pro:
+Latencia promedio: 9.37 segundos
+Costo total de las operaciones: $0.003392 USD
+-----------------------------------------------------
