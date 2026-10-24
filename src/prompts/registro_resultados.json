@@ -1,0 +1,14 @@
+{
+  "extraccion_ubicacion": {
+    "exitos": 3,
+    "intentos": 3
+  },
+  "extraccion_datos_numericos": {
+    "exitos": 3,
+    "intentos": 3
+  },
+  "analisis_instituciones": {
+    "exitos": 3,
+    "intentos": 3
+  }
+}

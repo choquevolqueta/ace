@@ -1,0 +1,148 @@
+{
+  "extraccion_ubicacion": {
+    "exitos": 3,
+    "intentos": 3,
+    "resultados": [
+      {
+        "intento": 1,
+        "valido": true,
+        "respuesta": "{\"ciudad\": \"La Paz\", \"pais\": \"Bolivia\"}",
+        "datos": {
+          "ciudad": "La Paz",
+          "pais": "Bolivia"
+        },
+        "error": null,
+        "latencia": 5.21,
+        "costo": 8.64e-05
+      },
+      {
+        "intento": 2,
+        "valido": true,
+        "respuesta": "{\"ciudad\": \"La Paz\", \"pais\": \"Bolivia\"}",
+        "datos": {
+          "ciudad": "La Paz",
+          "pais": "Bolivia"
+        },
+        "error": null,
+        "latencia": 2.79,
+        "costo": 8.64e-05
+      },
+      {
+        "intento": 3,
+        "valido": true,
+        "respuesta": "{\"ciudad\": \"La Paz\", \"pais\": \"Bolivia\"}",
+        "datos": {
+          "ciudad": "La Paz",
+          "pais": "Bolivia"
+        },
+        "error": null,
+        "latencia": 2.47,
+        "costo": 8.64e-05
+      }
+    ]
+  },
+  "extraccion_datos_numericos": {
+    "exitos": 3,
+    "intentos": 3,
+    "resultados": [
+      {
+        "intento": 1,
+        "valido": true,
+        "respuesta": "{\"departamentos\": 9, \"paises_limitrofes\": 5, \"superficie_km2\": 1098581}",
+        "datos": {
+          "departamentos": 9,
+          "paises_limitrofes": 5,
+          "superficie_km2": 1098581
+        },
+        "error": null,
+        "latencia": 2.77,
+        "costo": 0.0001209
+      },
+      {
+        "intento": 2,
+        "valido": true,
+        "respuesta": "{\"departamentos\": 9, \"paises_limitrofes\": 5, \"superficie_km2\": 1098581}",
+        "datos": {
+          "departamentos": 9,
+          "paises_limitrofes": 5,
+          "superficie_km2": 1098581
+        },
+        "error": null,
+        "latencia": 2.69,
+        "costo": 0.0001209
+      },
+      {
+        "intento": 3,
+        "valido": true,
+        "respuesta": "{\"departamentos\": 9, \"paises_limitrofes\": 5, \"superficie_km2\": 1098581}",
+        "datos": {
+          "departamentos": 9,
+          "paises_limitrofes": 5,
+          "superficie_km2": 1098581
+        },
+        "error": null,
+        "latencia": 3.0,
+        "costo": 0.0001209
+      }
+    ]
+  },
+  "analisis_instituciones": {
+    "exitos": 3,
+    "intentos": 3,
+    "resultados": [
+      {
+        "intento": 1,
+        "valido": true,
+        "respuesta": "{\"es_sede_de_gobierno\": true, \"instituciones\": [\"Palacio Quemado\", \"Palacio Legislativo\", \"Catedral Metropolitana de La Paz\", \"Palacio de Gobierno\", \"Casa Grande del Pueblo\"]}",
+        "datos": {
+          "es_sede_de_gobierno": true,
+          "instituciones": [
+            "Palacio Quemado",
+            "Palacio Legislativo",
+            "Catedral Metropolitana de La Paz",
+            "Palacio de Gobierno",
+            "Casa Grande del Pueblo"
+          ]
+        },
+        "error": null,
+        "latencia": 3.93,
+        "costo": 0.0001386
+      },
+      {
+        "intento": 2,
+        "valido": true,
+        "respuesta": "{\"es_sede_de_gobierno\": true, \"instituciones\": [\"Palacio Quemado\", \"Palacio Legislativo\", \"Catedral Metropolitana de La Paz\", \"Casa Grande del Pueblo\"]}",
+        "datos": {
+          "es_sede_de_gobierno": true,
+          "instituciones": [
+            "Palacio Quemado",
+            "Palacio Legislativo",
+            "Catedral Metropolitana de La Paz",
+            "Casa Grande del Pueblo"
+          ]
+        },
+        "error": null,
+        "latencia": 2.97,
+        "costo": 0.0001314
+      },
+      {
+        "intento": 3,
+        "valido": true,
+        "respuesta": "{\"es_sede_de_gobierno\": true, \"instituciones\": [\"Palacio Quemado\", \"Palacio Legislativo\", \"Casa de la Libertad\", \"Palacio de Gobierno\", \"Catedral Metropolitana de La Paz\"]}",
+        "datos": {
+          "es_sede_de_gobierno": true,
+          "instituciones": [
+            "Palacio Quemado",
+            "Palacio Legislativo",
+            "Casa de la Libertad",
+            "Palacio de Gobierno",
+            "Catedral Metropolitana de La Paz"
+          ]
+        },
+        "error": null,
+        "latencia": 3.0,
+        "costo": 0.0001398
+      }
+    ]
+  }
+}

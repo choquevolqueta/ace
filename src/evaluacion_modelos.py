@@ -12,7 +12,7 @@ def evaluar_modelo(nombre_modelo, pregunta, precio_entrada, precio_salida, repet
     for i in range(1, repeticiones + 1):
         print(f"\nrepeticion {i} de {repeticiones} {nombre_modelo}---")
 
-        url, body= consumir_deepseek.armar_peticion(pregunta, nombre_modelo)
+        url, body= consumir_deepseek.armar_peticion(nombre_modelo, pregunta, "Eres un asistente preciso.")
 
         inicio= time.perf_counter()
         datos= consumir_deepseek.enviar_peticion(url, body)
@@ -43,7 +43,7 @@ pregunta_prueba= "¿donde esta ubicada la plaza murillo?"
 
 modelos= [
     {"nombre": "deepseek-flash", "precio_entrada": 0.00000030, "precio_salida": 0.00000120},
-    {"nombre": "deepseek-v4-pro", "precio_entrada": 0.000000132, "precio_salida": 0.00000396},
+    {"nombre": "deepseek-v4-pro", "precio_entrada": 0.00000132, "precio_salida": 0.00000396},
 ]
 
 for config in modelos:
