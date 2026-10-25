@@ -1,15 +1,26 @@
-# Plantilla de repositorio base — Especialización en Desarrollo con IA Generativa (Accenture)
+# Mi mini aplicacion version 1.0
 
-Esta es la estructura base que vas a usar como punto de partida para tu proyecto en este programa. Es la misma estructura que vas a ir ampliando bloque a bloque, hasta llegar a la aplicación completa que entregas en el Gate 3.
+Hola, me llamo Alexander Cortez y este es el manual de primer uso de mi mini aplicacion. Inicialmente empece con la API de Gemini, pero debido a que tengo planeado usar la API de Deepseek por el tema de costos y disponibilidad hice este cambio de timon...
+Debo decir honestamente que cuesta ya que Deepseek funciona de manera distinta a Gemini, y posee algunas limitaciones que salve con codigo, de todos modos, me alegra el resultado actual hasta ahora
 
 ## Cómo empezar
 
-Estos pasos se completan de forma progresiva a lo largo de la Unidad U1.2, no todos el mismo día:
+El paso mas importante es descargar el repositorio desde el github ya sea como zip o usando el comando
+-git clone https://github.com/choquevolqueta/ace.git
 
-1. Descarga este archivo comprimido (adjunto en la plataforma) y descomprímelo en tu computador. Inicializa el control de versiones sobre esa carpeta y registra tu primer commit con esta estructura base, tal como llegó, antes de modificar nada.
-2. Crea tu entorno virtual de Python (por ejemplo, con `venv`) y actívalo.
-3. Instala las dependencias que necesites y regístralas en `requirements.txt` (al inicio puede estar vacío o con muy pocas).
-4. Copia `.env.example` a un archivo nuevo llamado `.env`, y completa ahí tus credenciales reales (llaves de API, tokens). El archivo `.env` nunca se sube al repositorio: ya está excluido en `.gitignore`.
+### Requisitos:
+Python 3.11 o superior(probado en 3.11.)
+Una API key de Deepseek
+
+### Instalacion:
+ Ejecutar en una terminal bash
+
+ python -m venv venv
+ venv\ Scripts\activate
+ pip install -r requirements.txt
+
+ ### Configuracion:
+Copia `.env.example` a un archivo nuevo llamado `.env`, y completa ahí tus credenciales reales (llaves de API, tokens). El archivo `.env` nunca se sube al repositorio: ya está excluido en `.gitignore`.
 
 ## Estructura de carpetas
 
@@ -25,3 +36,9 @@ Estos pasos se completan de forma progresiva a lo largo de la Unidad U1.2, no to
 - Ningún secreto (contraseña, llave de API, token) va escrito directamente en el código ni en ningún archivo que se suba al repositorio.
 - Cada proyecto nuevo tiene su propio entorno virtual: no se comparten dependencias entre proyectos distintos.
 - Todo el trabajo que se entrega en este programa vive en un repositorio de GitHub, sin excepción.
+
+## Registro del ensayo de instalacion limpia
+
+- Fecha: 2026-10-25
+
+Se inicio todo el procedimiento mostrado en la plataforma para la prueba de uso limpio desde cero. Siguiendo los pasos al pie de la letra y agregando la API key de Deepseek se puede dar fe que el programa test_consistencia.py el ultimo en ser desarrollado funciona sin problemas y de manera correcta.
