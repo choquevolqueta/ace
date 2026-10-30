@@ -42,6 +42,16 @@ def enviar_peticion(url, body):
     except requests.exceptions.Timeout:
         raise RuntimeError("Tiempo de espera agotado. La solicitud tardó demasiado en completarse.")
 
+    if respuesta.status_code in(401, 403):
+        raise RuntimeError(f"Error de autenticación: {respuesta.status_code} - Verifica tu API Key.")
+
+    if respuesta.status_code >= 500:
+        raise RuntimeError("Error del servidor. Intenta nuevamente más tarde.")
+    
+    if respuesta.status_code == 429:
+        raise TimeoutError("Limite excedido: demasiadas peticiones concurrentes. Intenta de nuevo en unos segundos.")
+
+    
     if respuesta.status_code != 200:
         raise RuntimeError(f"Error en la solicitud: {respuesta.status_code} - {respuesta.text}")    
         
@@ -125,7 +135,7 @@ def main():
 
         print(json.dumps(resultado, ensure_ascii=False, indent=2))
 
-    except (ValueError, RuntimeError) as error:
+    except (ValueError, RuntimeError, TimeoutError) as error:
         print(f"No se pudo completar la operación: {error}")
 
 if __name__ == "__main__":
