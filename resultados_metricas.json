@@ -1,0 +1,182 @@
+[
+  {
+    "id": 1,
+    "consulta": "¿Qué es Python?",
+    "referencia": "Python es un lenguaje de programación interpretado.",
+    "respuesta": "Python es un lenguaje de programación de alto nivel, interpretado y de propósito general.",
+    "precision": 0.5,
+    "cobertura": 1.0,
+    "f1": 0.6666666666666666
+  },
+  {
+    "id": 2,
+    "consulta": "¿En qué año fue la primera publicación de Python?",
+    "referencia": "La primera publicación de Python fue en 1991.",
+    "respuesta": "La primera publicación de Python fue en 1991.",
+    "precision": 1.0,
+    "cobertura": 1.0,
+    "f1": 1.0
+  },
+  {
+    "id": 3,
+    "consulta": "¿Qué es una lista en Python?",
+    "referencia": "Una lista es una colección ordenada y modificable.",
+    "respuesta": "Una lista en Python es una colección ordenada y mutable de elementos.",
+    "precision": 0.5833333333333334,
+    "cobertura": 0.875,
+    "f1": 0.7000000000000001
+  },
+  {
+    "id": 4,
+    "consulta": "¿Qué devuelve len en Python?",
+    "referencia": "len devuelve la cantidad de elementos de un objeto.",
+    "respuesta": "Devuelve la cantidad de elementos o caracteres de un objeto.",
+    "precision": 0.8,
+    "cobertura": 0.8888888888888888,
+    "f1": 0.8421052631578948
+  },
+  {
+    "id": 5,
+    "consulta": "¿Para qué sirve print en Python?",
+    "referencia": "print muestra una representación de los objetos en la salida de texto.",
+    "respuesta": "print sirve para mostrar datos o resultados en la pantalla.",
+    "precision": 0.3,
+    "cobertura": 0.25,
+    "f1": 0.2727272727272727
+  },
+  {
+    "id": 6,
+    "consulta": "¿Qué es un diccionario en Python?",
+    "referencia": "Un diccionario relaciona claves con valores.",
+    "respuesta": "Es una colección mutable de pares clave-valor que permite acceso rápido mediante claves únicas.",
+    "precision": 0.07142857142857142,
+    "cobertura": 0.16666666666666666,
+    "f1": 0.1
+  },
+  {
+    "id": 7,
+    "consulta": "¿Qué es una tupla en Python?",
+    "referencia": "Una tupla es una secuencia inmutable.",
+    "respuesta": "Una tupla es una secuencia inmutable y ordenada de elementos en Python.",
+    "precision": 0.5,
+    "cobertura": 1.0,
+    "f1": 0.6666666666666666
+  },
+  {
+    "id": 8,
+    "consulta": "¿Qué es un conjunto en Python?",
+    "referencia": "Un conjunto almacena elementos únicos.",
+    "respuesta": "Un conjunto es una colección desordenada de elementos únicos y mutables.",
+    "precision": 0.36363636363636365,
+    "cobertura": 0.8,
+    "f1": 0.5000000000000001
+  },
+  {
+    "id": 9,
+    "consulta": "¿Para qué sirve def en Python?",
+    "referencia": "def define una función.",
+    "respuesta": "Sirve para definir funciones reutilizables con nombre y parámetros en Python.",
+    "precision": 0.0,
+    "cobertura": 0.0,
+    "f1": 0.0
+  },
+  {
+    "id": 10,
+    "consulta": "¿Qué hace return en una función?",
+    "referencia": "return termina la función y devuelve un valor al llamador.",
+    "respuesta": "return devuelve un valor al llamador y termina la ejecución de la función.",
+    "precision": 0.7692307692307693,
+    "cobertura": 1.0,
+    "f1": 0.8695652173913044
+  },
+  {
+    "id": 11,
+    "consulta": "¿Para qué sirve try except en Python?",
+    "referencia": "try except permite manejar excepciones.",
+    "respuesta": "Sirve para manejar errores y evitar que el programa se detenga.",
+    "precision": 0.09090909090909091,
+    "cobertura": 0.2,
+    "f1": 0.12500000000000003
+  },
+  {
+    "id": 12,
+    "consulta": "¿Qué indica HTTP 429?",
+    "referencia": "HTTP 429 indica demasiadas solicitudes.",
+    "respuesta": "Indica que el cliente ha enviado demasiadas solicitudes en un período de tiempo.",
+    "precision": 0.23076923076923078,
+    "cobertura": 0.6,
+    "f1": 0.33333333333333337
+  },
+  {
+    "id": 13,
+    "consulta": "¿Qué indica HTTP 403?",
+    "referencia": "HTTP 403 indica que el servidor rechaza autorizar la solicitud.",
+    "respuesta": "Indica que el servidor entiende la solicitud pero deniega el acceso por falta de permisos.",
+    "precision": 0.4,
+    "cobertura": 0.6,
+    "f1": 0.48
+  },
+  {
+    "id": 14,
+    "consulta": "¿Qué significa backoff exponencial?",
+    "referencia": "El backoff exponencial aumenta la espera entre reintentos de forma exponencial.",
+    "respuesta": "Estrategia que aumenta progresivamente el tiempo de espera entre reintentos, multiplicándolo exponencialmente.",
+    "precision": 0.5,
+    "cobertura": 0.5454545454545454,
+    "f1": 0.5217391304347826
+  },
+  {
+    "id": 15,
+    "consulta": "¿Para qué sirve jitter en los reintentos?",
+    "referencia": "El jitter añade aleatoriedad a la espera para evitar reintentos simultáneos.",
+    "respuesta": "El jitter añade aleatoriedad a los reintentos para evitar sincronizaciones y avalanchas.",
+    "precision": 0.6666666666666666,
+    "cobertura": 0.7272727272727273,
+    "f1": 0.6956521739130435
+  },
+  {
+    "id": 16,
+    "consulta": "¿Qué hace lower en una cadena de Python?",
+    "referencia": "lower devuelve una copia de la cadena convertida a minúsculas.",
+    "respuesta": "Convierte todos los caracteres de una cadena a minúsculas.",
+    "precision": 0.5555555555555556,
+    "cobertura": 0.5,
+    "f1": 0.5263157894736842
+  },
+  {
+    "id": 17,
+    "consulta": "¿Qué hace split sin argumentos en Python?",
+    "referencia": "split divide una cadena por secuencias de espacios en blanco.",
+    "respuesta": "Divide la cadena usando espacios en blanco como separador, ignorando los consecutivos.",
+    "precision": 0.4166666666666667,
+    "cobertura": 0.5,
+    "f1": 0.45454545454545453
+  },
+  {
+    "id": 18,
+    "consulta": "¿Qué hace Counter en Python?",
+    "referencia": "Counter cuenta las apariciones de cada elemento.",
+    "respuesta": "Counter cuenta elementos iterables y devuelve un diccionario con sus frecuencias.",
+    "precision": 0.18181818181818182,
+    "cobertura": 0.2857142857142857,
+    "f1": 0.2222222222222222
+  },
+  {
+    "id": 19,
+    "consulta": "¿Qué hace el modo a al escribir en un archivo?",
+    "referencia": "El modo a agrega contenido al final sin borrar el contenido existente.",
+    "respuesta": "Abre el archivo para añadir datos al final sin borrar su contenido.",
+    "precision": 0.5,
+    "cobertura": 0.5,
+    "f1": 0.5
+  },
+  {
+    "id": 20,
+    "consulta": "¿Qué ventaja tiene usar un mock de la API en una prueba?",
+    "referencia": "Permite probar el código sin depender de la red ni consumir la API real.",
+    "respuesta": "Permite probar de forma aislada, rápida y controlada sin la API real.",
+    "precision": 0.5833333333333334,
+    "cobertura": 0.5,
+    "f1": 0.5384615384615384
+  }
+]
