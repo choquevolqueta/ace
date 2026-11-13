@@ -19,3 +19,6 @@ Thumbs.db
 
 # Logs
 *.log
+
+# Planes locales de superpowers (no se suben)
+docs/superpowers/

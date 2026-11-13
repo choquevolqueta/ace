@@ -9,15 +9,27 @@ El paso mas importante es descargar el repositorio desde el github ya sea como z
 -git clone https://github.com/choquevolqueta/ace.git
 
 ### Requisitos:
-Python 3.11 o superior(probado en 3.11.)
-Una API key de Deepseek
+- Python **3.13** (probado). No uses 3.14/3.15 por ahora: algunas dependencias (por ejemplo `zstandard`) todavía no publican wheels para esas versiones y la instalación intenta compilar, lo que requiere Visual C++ Build Tools.
+- Una API key de Deepseek
 
-### Instalacion:
- Ejecutar en una terminal bash
+### Instalación:
+En Windows (PowerShell o CMD):
 
- python -m venv venv
- venv\ Scripts\activate
- pip install -r requirements.txt
+```bash
+py -3.13 -m venv venv
+venv\Scripts\activate
+python -m pip install -r requirements.txt
+```
+
+En macOS/Linux:
+
+```bash
+python3.13 -m venv venv
+source venv/bin/activate
+python -m pip install -r requirements.txt
+```
+
+Si `py -3.13` no existe, instalá Python 3.13 desde python.org y volvé a ejecutar el comando.
 
  ### Configuracion:
 Copia `.env.example` a un archivo nuevo llamado `.env`, y completa ahí tus credenciales reales (llaves de API, tokens). El archivo `.env` nunca se sube al repositorio: ya está excluido en `.gitignore`.
@@ -27,7 +39,7 @@ Copia `.env.example` a un archivo nuevo llamado `.env`, y completa ahí tus cred
 - `src/` : todo el código fuente de tu proyecto va aquí.
 - `docs/` : documentación técnica del proyecto (diagramas, decisiones de arquitectura, notas).
 - `tests/` : pruebas de tu código (las vas a usar más adelante en el programa, cuando el proyecto lo requiera).
-- `requirements.txt` : dependencias de Python de tu proyecto, para que cualquier otra persona pueda reconstruir tu entorno con un solo comando.
+- `requirements.txt` : dependencias de Python con versiones exactas, para que cualquier otra persona pueda reconstruir tu entorno con un solo comando.
 - `.env.example` : plantilla de las variables de entorno que tu proyecto necesita, sin valores reales. Tu archivo `.env` real (con tus credenciales) nunca se commitea.
 - `.gitignore` : le dice a Git qué archivos y carpetas ignorar (entre ellos, tu entorno virtual y tu archivo `.env`).
 
