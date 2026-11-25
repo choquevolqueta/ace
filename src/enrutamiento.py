@@ -8,7 +8,7 @@ from langchain_core.runnables import (
     RunnableLambda,
     RunnablePassthrough,
 )
-from langchain_deepseek import ChatDeepSeek
+from langchain_google_genai import ChatGoogleGenerativeAI
 
 from src.cadena_tres_pasos import construir_cadena
 
@@ -115,8 +115,8 @@ def construir_cadena_con_enrutamiento(
 
 
 if __name__ == "__main__":
-    modelo = ChatDeepSeek(
-        model="deepseek-flash",
+    modelo = ChatGoogleGenerativeAI(
+        model="gemini-3.5-flash-lite",
         temperature=0,
         timeout=30,
         max_retries=2,

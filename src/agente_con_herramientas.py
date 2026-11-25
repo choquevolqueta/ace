@@ -1,7 +1,7 @@
 from dotenv import load_dotenv
 from langchain.agents import create_agent
 from langchain_core.tools import tool
-from langchain_deepseek import ChatDeepSeek
+from langchain_google_genai import ChatGoogleGenerativeAI
 
 load_dotenv()
 
@@ -35,8 +35,8 @@ def calcular(expresion: str) -> str:
 
 
 if __name__ == "__main__":
-    modelo = ChatDeepSeek(
-        model="deepseek-flash",
+    modelo = ChatGoogleGenerativeAI(
+        model="gemini-3.5-flash-lite",
         temperature=0,
         timeout=30,
         max_retries=2,

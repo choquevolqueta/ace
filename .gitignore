@@ -22,3 +22,6 @@ Thumbs.db
 
 # Planes locales de superpowers (no se suben)
 docs/superpowers/
+
+# Credenciales de servicio (Google Cloud, etc.)
+credenciales.json

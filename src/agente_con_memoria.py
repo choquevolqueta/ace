@@ -10,13 +10,13 @@ from dotenv import load_dotenv
 from langchain.agents import create_agent
 from langchain_core.messages import AIMessage, ToolMessage
 from langchain_core.tools import tool
-from langchain_deepseek import ChatDeepSeek
+from langchain_google_genai import ChatGoogleGenerativeAI
 from langgraph.checkpoint.memory import InMemorySaver
 from pydantic import BaseModel, Field
 
 # Configuraciones e Inicializaciones
 load_dotenv()
-modelo = ChatDeepSeek(model="deepseek-flash")
+modelo = ChatGoogleGenerativeAI(model="gemini-3.5-flash-lite")
 
 # Memoria en RAM: guarda el estado de cada conversación por thread_id.
 # En la API clásica, la profesora usa historiales + obtener_historial

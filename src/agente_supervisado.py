@@ -13,17 +13,17 @@ from dotenv import load_dotenv
 from langchain.agents import create_agent
 from langchain_core.messages import AIMessage, HumanMessage, ToolMessage
 from langchain_core.tools import tool
-from langchain_deepseek import ChatDeepSeek
+from langchain_google_genai import ChatGoogleGenerativeAI
 from langgraph.checkpoint.memory import InMemorySaver
 from pydantic import BaseModel, Field
 
 load_dotenv()
 
-clave = os.getenv("DEEPSEEK_API_KEY")
-nombre_modelo = os.getenv("DEEPSEEK_MODEL", "deepseek-flash")
+clave = os.getenv("GEMINI_API_KEY")
+nombre_modelo = os.getenv("GEMINI_MODEL", "gemini-3.5-flash-lite")
 
 if not clave:
-    raise ValueError("Falta DEEPSEEK_API_KEY en el archivo .env")
+    raise ValueError("Falta GEMINI_API_KEY en el archivo .env")
 
 SESSION_ID = "cliente_a"
 RUTA_TRAZAS = "docs/trazas_agente_supervisado.jsonl"
@@ -294,7 +294,7 @@ PROMPT_SISTEMA = (
 
 
 if __name__ == "__main__":
-    modelo = ChatDeepSeek(
+    modelo = ChatGoogleGenerativeAI(
         model=nombre_modelo,
         temperature=0,
         timeout=30,

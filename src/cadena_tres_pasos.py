@@ -1,7 +1,7 @@
 from dotenv import load_dotenv
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import PromptTemplate
-from langchain_deepseek import ChatDeepSeek
+from langchain_google_genai import ChatGoogleGenerativeAI
 
 
 plantilla_explicacion = PromptTemplate.from_template(
@@ -39,8 +39,8 @@ def construir_cadena(modelo):
 
 if __name__ == "__main__":
     load_dotenv()
-    modelo = ChatDeepSeek(
-        model="deepseek-flash",
+    modelo = ChatGoogleGenerativeAI(
+        model="gemini-3.5-flash-lite",
         temperature=0,
         timeout=30,
         max_retries=2,
