@@ -81,7 +81,7 @@ def guardar_reporte(ruta_archivo: str, resultados: list[dict], k: int, chunk_siz
 
 if __name__ == "__main__":
     CARPETA_DB = "vectorstore_ejemplo"
-    K = 3
+    K = 4
     vs = cargar_vectorstore(CARPETA_DB)
 
     pregunta = "Cuáles son los errores de credenciales inválidas?"
@@ -143,10 +143,10 @@ if __name__ == "__main__":
         },
     ]
 
-    resultados = evaluar_recuperacion(retriever, casos_evaluacion, 3)
+    resultados = evaluar_recuperacion(retriever, casos_evaluacion, 4)
     print(resultados)
 
-    guardar_reporte("resultados_evaluacion_rag.txt", resultados, 3)
+    guardar_reporte("resultados_evaluacion_rag.txt", resultados, 4)
 
     """
     Precisión: Fórmula: Verdaderos Positivos / (Verdaderos Positivos + Falsos Positivos) 

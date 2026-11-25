@@ -176,6 +176,6 @@ def ejecutar_consulta(vectorstore, pregunta: str, k: int=3):
 
 if __name__ == "__main__":
     CARPETA_DB = "vectorstore_ejemplo"
-    K = 3
+    K = 4
     vs = cargar_vectorstore(CARPETA_DB)
-    ejecutar_consulta(vs, "¿Cuántos intentos hace el cliente ante un TimeoutError y cuánto espera entre cada uno?", 3)
+    ejecutar_consulta(vs, "¿Cuántos intentos hace el cliente ante un TimeoutError y cuánto espera entre cada uno?", K)

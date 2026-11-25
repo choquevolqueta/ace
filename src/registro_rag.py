@@ -124,7 +124,7 @@ def guardar_registro_jsonl(registro: dict, ruta_archivo: str = "registro_latenci
 
 if __name__ == "__main__":
     CARPETA_DB = "vectorstore_ejemplo"
-    K = 3
+    K = 4
     vs = cargar_vectorstore(CARPETA_DB)
 
     pregunta = "¿Cuántos intentos hace el cliente ante un TimeoutError y cuánto espera entre cada uno?"
