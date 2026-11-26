@@ -25,3 +25,4 @@ docs/superpowers/
 
 # Credenciales de servicio (Google Cloud, etc.)
 credenciales.json
+project-*.json

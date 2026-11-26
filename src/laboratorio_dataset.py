@@ -82,12 +82,12 @@ if __name__ == "__main__":
 
     client = genai.Client(
         vertexai=True,
-        project="braided-course-515122-u5",
+        project="project-a548da43-756c-4e92-b75",
         location="us-central1"
     )
 
     #Este es el dataset con el que vamos a entrenar al modelo
-    dataset = types.TuningDataset(gcs_uri="gs://bucket-ejemplo-otro/ejemplos_tuning.jsonl")
+    dataset = types.TuningDataset(gcs_uri="gs://bucket-accenture-choquevolqueta/ejemplos_tuning.jsonl")
 
     config = types.CreateTuningJobConfig(
         tuning_mode=types.TuningMode.TUNING_MODE_PEFT_ADAPTER,
