@@ -2,27 +2,30 @@
 
 ## 1. El problema
 
-La carnicería de mis padres no alcanza a responder por WhatsApp las consultas de precios, horarios y preguntas frecuentes. Necesito un asistente que responda con información correcta, sin inventar, y con un tono natural.
+El agente de delivery responde sobre estado de pedidos, productos, costos de envío y reembolsos. Necesita datos frescos, no inventar estados ni montos, y derivar los reembolsos a aprobación humana.
 
 ## 2. Resultado del método de decisión
 
 | Clave | Valor | Evidencia |
 |---|---|---|
-| `informacion_cambia_seguido` | True | Los precios cambian semanal o mensualmente; la ficha pide conexión a la base de precios en tiempo real. |
-| `problema_de_formato_o_tono` | False | No hay 20 respuestas todavía para medir fallos. El tono es un requisito, pero no una evidencia. |
-| `dataset_grande_y_de_calidad` | False | No hay dataset etiquetado; la información es una lista de precios y un FAQ. |
-| `presupuesto_limitado_o_iterar_rapido` | True | Negocio familiar, sin presupuesto para varios entrenamientos; un cambio de precio debe verse el mismo día. |
-| `necesita_multiples_variantes` | False | Un negocio, un idioma, un canal. |
+| `informacion_cambia_seguido` | True | El estado de los pedidos, los precios y las tarifas cambian a diario; el agente consulta herramientas en vivo. |
+| `problema_de_formato_o_tono` | False | No hay 20 respuestas medidas ni un defecto persistente de formato. Queda como riesgo a medir. |
+| `dataset_grande_y_de_calidad` | False | No hay 200 ejemplos etiquetados de delivery. El tuning fue una side mission de clasificación de errores. |
+| `presupuesto_limitado_o_iterar_rapido` | True | Proyecto académico; un job de tuning tarda horas y uno se perdió por una suspensión. |
+| `necesita_multiples_variantes` | False | Un solo agente, un idioma, un canal. |
 
 **Puntaje: RAG 5 · PEFT 1 · Fine-tuning completo 0.** No hay empate.
 
 ## 3. Técnica elegida y por qué
 
-Elijo **RAG**. Lo que le falta al asistente no es capacidad del modelo, sino información actualizada: los precios y horarios cambian, y RAG se actualiza reindexando los documentos. Fine-tuning congelaría los precios del día del entrenamiento, y PEFT no resuelve la frescura ni la falta de dataset. El tono humano se maneja con el prompt y ejemplos de conversación, no con los pesos. Aun si el tono fallara en 3 de 20 respuestas, RAG seguiría ganando (5 contra 3).
+Elijo **RAG con herramientas y prompt versionado**. Lo que le falta al agente no es capacidad del modelo, sino información actualizada: el estado y el costo de un envío cambian y se consultan en vivo. Fine-tuning congelaría esos datos, y PEFT no agrega herramientas ni frescura. Tampoco hay dataset de delivery para entrenar.
+
+Aunque `problema_de_formato_o_tono` resultara True, el puntaje quedaría **RAG 5 · PEFT 3 · Fine-tuning completo 1**: RAG seguiría ganando. No se entrena el modelo en esta iteración.
 
 ## 4. Qué necesitaría para ejecutarla
 
-- **3 documentos**: lista de precios, horarios/ubicación y FAQ. Hoy tengo **0 de 3** digitalizados.
-- **Reindexado semanal**, porque la lista de precios cambia; ese proceso todavía no existe.
-- **20–30 conversaciones de prueba** para validar exactitud y tono. Hoy tengo 0.
-- **0 ejemplos etiquetados** para entrenar, porque no voy a personalizar el modelo.
+- **0 ejemplos etiquetados** para entrenar, porque no se personaliza el modelo.
+- **20 conversaciones de prueba** para medir formato, tono y exactitud; hoy hay 0.
+- **Integración real con el sistema de pedidos**: hoy `consultar_estado_envio_detallado` y `calcular_costo_envio` trabajan con datos simulados.
+- **Conectar la versión activa del prompt** al agente: hoy el prompt está fijo en el código, aunque el registro y la supervisión ya existen.
+- **1 reembolso de prueba** con aprobación humana registrada en la traza, para validar el control más crítico.

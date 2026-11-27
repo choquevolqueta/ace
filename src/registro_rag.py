@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 from langchain_google_genai import ChatGoogleGenerativeAI #Modelo para instanciar gemini
 
 from rag_indexer import cargar_vectorstore, formatear_contexto 
+from registro_prompts import obtener_activa
 
 load_dotenv()
 
@@ -63,6 +64,7 @@ def registrar_consulta(vectorstore, pregunta: str, k: int = 3) -> dict:
     Medir la latencia de cada etapa y extraer los tokens consumidos (reales) y el costo de esto
     """
     tiempos = {} #Es donde voy a almacenar la latencia de cada etapa
+    version = obtener_activa() #Prompt aprobado y activo (Bloque 32)
 
     chat_model = ChatGoogleGenerativeAI(model="gemini-3.5-flash-lite")
     
@@ -74,7 +76,7 @@ def registrar_consulta(vectorstore, pregunta: str, k: int = 3) -> dict:
     #Etapa 2: Armado del prompt (agregando el contexto/chunks formateados) - Acción Local
     with medir(tiempos, "armado_prompt"):
         contexto, citas = formatear_contexto(chunks)
-        prompt = PROMPT_TEMPLATE.format(contexto=contexto, pregunta=pregunta)
+        prompt = version["texto"] + "\n\n" + PROMPT_TEMPLATE.format(contexto=contexto, pregunta=pregunta)
 
     #Etapa 3: Generación de la respuesta con Gemini
     with medir(tiempos, "generacion"):
@@ -102,6 +104,7 @@ def registrar_consulta(vectorstore, pregunta: str, k: int = 3) -> dict:
         "timestamp": datetime.now(timezone.utc).isoformat(),
         "pregunta": pregunta,
         "k": k,
+        "prompt_huella": version["huella"],
         "respuesta_generada": respuesta.content,
         "citas_disponibles": citas,
         "tiempo_ms": {etapa: round(seg * 1000, 2) for etapa, seg in tiempos.items()},

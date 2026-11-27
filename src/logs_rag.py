@@ -13,6 +13,7 @@ from langchain_core.runnables import RunnableLambda, RunnablePassthrough #Pasa u
 from langchain_google_genai import ChatGoogleGenerativeAI #La clase que llama al modelo llm
 
 from rag_indexer import cargar_vectorstore, formatear_contexto
+from registro_prompts import obtener_activa
 
 """
 Contextvars: crea una variable de contexto. 
@@ -138,8 +139,9 @@ def ejecutar_consulta(vectorstore, pregunta: str, k: int=3):
     token = trace_id_var.set(f"trace-{uuid.uuid4().hex[:8]}")
     try:
         retriever = vectorstore.as_retriever(search_kwargs={"k": k})
+        version = obtener_activa()
         prompt = ChatPromptTemplate.from_messages([
-            ("system", "Eres un asistente de soporte. Cita la fuente de cada afirmacion con su numero entre corchetes, como [1]. Si el contexto no alcanza para responder, dilo explicitamente en vez de inventar"),
+            ("system", version["texto"]),
             ("human", "Contexto: \n{contexto}\n\n Pregunta: {pregunta}")
         ])
         modelo = ChatGoogleGenerativeAI(model="gemini-3.5-flash-lite")

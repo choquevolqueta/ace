@@ -13,6 +13,7 @@ from langchain_core.tools import tool
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langgraph.checkpoint.memory import InMemorySaver
 from pydantic import BaseModel, Field
+from registro_prompts import obtener_activa
 
 # Configuraciones e Inicializaciones
 load_dotenv()
@@ -210,13 +211,15 @@ herramientas = [
 ]
 
 # Construcción del agente
+PROMPT_AGENTE = obtener_activa()["texto"] + "\n\n" + (
+    "Eres un asistente de logística que responde preguntas "
+    "usando las herramientas disponibles."
+)
+
 agente = create_agent(
     modelo,
     herramientas,
-    system_prompt=(
-        "Eres un asistente de logística que responde preguntas "
-        "usando las herramientas disponibles."
-    ),
+    system_prompt=PROMPT_AGENTE,
     checkpointer=memoria,
 )
 

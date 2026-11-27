@@ -1,4 +1,4 @@
-# Matriz de riesgos del asistente de carnicería
+# Matriz de riesgos del agente de delivery
 
 Estimaciones previas a los controles, no probabilidades medidas. BAJO 1-3; MEDIO 4-8; ALTO 9-14; CRITICO 15-25. Los cortes son la convención del programa.
 
@@ -6,46 +6,62 @@ AL LIMITE indica que variar un punto en P o I cambia la categoría. Cada respons
 
 | ID | Riesgo | P | I | Puntaje | Categoría | AL LIMITE |
 |---|---|---:|---:|---:|---|---|
-| R1 | El asistente responde con un precio que ya cambió | 4 | 4 | 16 | CRITICO | Si |
-| R2 | El asistente inventa un precio o una promoción que no está en las fuentes | 3 | 5 | 15 | CRITICO | Si |
-| R3 | Una instrucción dentro de un mensaje o documento hace que el asistente ignore sus reglas | 3 | 4 | 12 | ALTO | Si |
-| R5 | Los logs guardan teléfonos o direcciones de clientes | 2 | 5 | 10 | ALTO | Si |
-| R4 | El tono repetitivo hace que WhatsApp banee el número del negocio | 3 | 3 | 9 | ALTO | Si |
-| R6 | El modelo de embeddings cambia o queda deprecado y el índice queda inconsistente | 2 | 3 | 6 | MEDIO | Si |
+| R1 | Un reembolso se ejecuta por un monto o pedido incorrecto, o sin aprobación | 3 | 5 | 15 | CRITICO | Si |
+| R2 | Se filtran direcciones o teléfonos de clientes en logs, trazas o memoria | 3 | 5 | 15 | CRITICO | Si |
+| R3 | El agente informa un estado de envío incorrecto o desactualizado | 3 | 4 | 12 | ALTO | Si |
+| R4 | Un comentario del pedido o mensaje del cliente intenta cambiar las reglas del agente | 3 | 4 | 12 | ALTO | Si |
+| R7 | Se activa un cambio de prompt sin revisión | 3 | 4 | 12 | ALTO | Si |
+| R5 | Un cliente recibe datos de otro pedido por reutilizar el thread_id o la memoria | 2 | 5 | 10 | ALTO | Si |
+| R6 | El costo de envío calculado es incorrecto y se informa como definitivo | 3 | 3 | 9 | ALTO | Si |
 
-## R1 El asistente responde con un precio que ya cambió
+## R1 Un reembolso se ejecuta por un monto o pedido incorrecto, o sin aprobación
 
-**Justificacion**: La lista de precios cambia semanal o mensualmente; un índice viejo produce una respuesta comercial equivocada.
+**Justificacion**: El reembolso es irreversible y mueve fondos; una validación débil o una aprobación mal informada produce pérdida directa.
 
-**Mitigacion**: Reindexado semanal de la lista y fecha de fuente en cada chunk; src/rag_indexer.py (Bloques 24 y 25).
+**Mitigacion**: Validación de pedido existente, estado entregado, monto menor o igual al total y un reembolso por pedido; aprobación humana en src/agente_supervisado.py y src/agente_con_memoria.py (Bloques 21-23 y 32).
 
-**Supervision**: El dueño revisa y aprueba la lista nueva antes de publicarla; si la fuente supera la semana, el asistente no responde precios.
+**Supervision**: Aprobación humana explícita antes de ejecutar; revisión obligatoria de trazas después de cada reembolso (docs/limites_autonomia_agente.md).
 
-**Responsable**: Dueño del negocio
+**Responsable**: Responsable de operaciones
 
-**Evidencia**: Pendiente: el corpus de la carnicería todavía no está indexado.
+**Evidencia**: esperar_aprobacion en src/agente_con_memoria.py:188; trazas_agente.jsonl.
 
-**Estado**: Pipeline RAG probado con otro corpus; falta cargar la lista real.
-
-
-## R2 El asistente inventa un precio o una promoción que no está en las fuentes
-
-**Justificacion**: El modelo puede completar un dato faltante y comprometer al negocio.
-
-**Mitigacion**: Prompt con abstención y citas; sin contexto suficiente no responde; validación de citas (Bloques 26 y 31).
-
-**Supervision**: Si falta contexto, la consulta se deriva al dueño antes de responder.
-
-**Responsable**: Dueño del negocio
-
-**Evidencia**: Prompt v2 y flujo RAG con citas; falta prueba con preguntas reales.
-
-**Estado**: Diseñado; prueba real pendiente.
+**Estado**: Aprobación implementada; faltan pruebas de regresión y límites de monto en producción.
 
 
-## R3 Una instrucción dentro de un mensaje o documento hace que el asistente ignore sus reglas
+## R2 Se filtran direcciones o teléfonos de clientes en logs, trazas o memoria
 
-**Justificacion**: El texto del cliente o del corpus puede intentar cambiar el comportamiento del asistente.
+**Justificacion**: El agente maneja datos de entrega; los logs y las trazas persistentes amplían su exposición.
+
+**Mitigacion**: Registrar huellas y longitudes en vez de contenido (src/logs_rag.py, Bloque 31); revisar y minimizar trazas_agente.jsonl.
+
+**Supervision**: Aprobación para acceder o exportar logs y trazas; revisión semanal.
+
+**Responsable**: Custodio de datos
+
+**Evidencia**: logs_rag.py registra hashes; las trazas contienen datos del pedido.
+
+**Estado**: Parcial: falta política de acceso y limpieza de trazas históricas.
+
+
+## R3 El agente informa un estado de envío incorrecto o desactualizado
+
+**Justificacion**: El cliente decide en base al estado; un dato viejo genera reclamos y entregas fallidas.
+
+**Mitigacion**: consultar_estado_envio_detallado es de solo lectura y debe incluir timestamp; si el dato es viejo o desconocido, no afirmar (Bloques 21-23).
+
+**Supervision**: Si el estado no se puede confirmar, derivar a una persona antes de responder.
+
+**Responsable**: Responsable de logística
+
+**Evidencia**: Tool consultar_estado_envio_detallado en src/agente_con_memoria.py.
+
+**Estado**: Prueba con datos simulados; falta integración con el carrier real.
+
+
+## R4 Un comentario del pedido o mensaje del cliente intenta cambiar las reglas del agente
+
+**Justificacion**: El texto del cliente entra al contexto y puede intentar revelar el prompt o forzar un reembolso.
 
 **Mitigacion**: Filtro de patrones y delimitación de contexto; src/prevencion_prompt_inyection.py (Bloque 31).
 
@@ -55,50 +71,50 @@ AL LIMITE indica que variar un punto en P o I cambia la categoría. Cada respons
 
 **Evidencia**: El script bloquea 2 patrones en la pregunta y descarta un documento con 3.
 
-**Estado**: Prototipo probado; falta integrarlo al flujo de WhatsApp.
+**Estado**: Prototipo probado; falta integrarlo al agente de delivery.
 
 
-## R5 Los logs guardan teléfonos o direcciones de clientes
+## R7 Se activa un cambio de prompt sin revisión
 
-**Justificacion**: Los clientes pegan datos personales; un log persistente amplía su exposición.
+**Justificacion**: El prompt define abstención, límites de reembolso y defensa anti-inyección; un cambio sin revisar los elimina.
 
-**Mitigacion**: Registrar huellas y longitudes, no contenido crudo; src/logs_rag.py (Bloque 31).
+**Mitigacion**: Registro con huellas, diff, interrupt y aprobación de la huella exacta; la versión activa la leen el RAG y los agentes: src/registro_prompts.py, src/grafo_supervision.py, src/registro_rag.py, src/agente_supervisado.py y src/agente_con_memoria.py (Bloque 32).
 
-**Supervision**: Aprobación para acceder o exportar los logs.
+**Supervision**: El responsable revisa el diff y aprueba la huella exacta antes de activar.
 
-**Responsable**: Custodio de datos
+**Responsable**: Responsable funcional
 
-**Evidencia**: logs_rag.py registra hashes y longitudes.
+**Evidencia**: docs/evidencias/supervision.json; .local/prompt_activo.json (595743c6ac49); PROMPT_AGENTE incluye las reglas v2.
 
-**Estado**: Parcial: falta política de acceso.
-
-
-## R4 El tono repetitivo hace que WhatsApp banee el número del negocio
-
-**Justificacion**: Sin la API de Meta, los patrones repetitivos se parecen a un bot y arriesgan el canal.
-
-**Mitigacion**: Variación de respuestas, few-shot y límite de frecuencia; RF-03 del proyecto.
-
-**Supervision**: Revisión semanal de conversaciones marcadas por el dueño.
-
-**Responsable**: Dueño del negocio
-
-**Evidencia**: Requisito RF-03; todavía no hay conversaciones.
-
-**Estado**: Pendiente.
+**Estado**: v2 activa y leída por el agente; falta uso en producción.
 
 
-## R6 El modelo de embeddings cambia o queda deprecado y el índice queda inconsistente
+## R5 Un cliente recibe datos de otro pedido por reutilizar el thread_id o la memoria
 
-**Justificacion**: Un cambio de modelo obliga a reindexar; mezclar dimensiones rompe la búsqueda.
+**Justificacion**: La memoria por InMemorySaver se indexa por thread_id; un id compartido mezcla conversaciones y pedidos.
 
-**Mitigacion**: Manifiesto del modelo y revisión periódica; reindexar con el mismo modelo (Bloque 28).
+**Mitigacion**: thread_id único por cliente y sesión, pruebas de aislamiento y no persistir memoria entre clientes (LangGraph, Bloque 23).
 
-**Supervision**: No requiere por consulta; revisión trimestral del responsable técnico.
+**Supervision**: Revisión de trazas cuando un cliente consulta un pedido que no es suyo.
 
 **Responsable**: Responsable técnico
 
-**Evidencia**: Pendiente: no hay manifiesto del índice.
+**Evidencia**: InMemorySaver y thread_id en src/agente_con_memoria.py.
 
-**Estado**: Pendiente.
+**Estado**: Pendiente: falta prueba de aislamiento entre clientes.
+
+
+## R6 El costo de envío calculado es incorrecto y se informa como definitivo
+
+**Justificacion**: calcular_costo_envio es local; un error de fórmula o de tarifa produce un precio falso.
+
+**Mitigacion**: Guardrail de rango y contraste con la tarifa vigente; no confirmar el monto sin validación (docs/limites_autonomia_agente.md).
+
+**Supervision**: Si el monto queda fuera de rango, lo revisa una persona antes de comunicarlo.
+
+**Responsable**: Responsable de logística
+
+**Evidencia**: Tool calcular_costo_envio; límite de autonomía documentado.
+
+**Estado**: Parcial: falta guardrail automático.
 

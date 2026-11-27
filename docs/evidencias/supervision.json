@@ -1,21 +1,21 @@
 [
   {
-    "thread_id": "prompt-34ec73b2ef8d4fb88e6b40e54d5da798",
+    "thread_id": "prompt-d653c8f2adc44d5b9a87339ddb6c0285",
     "pausa_verificada": true,
     "decision": true,
     "estado_final": {
-      "huella_nueva": "52a4244f30b7",
-      "huella_activa": "52a4244f30b7",
+      "huella_nueva": "595743c6ac49",
+      "huella_activa": "595743c6ac49",
       "aprobado": true
     }
   },
   {
-    "thread_id": "prompt-5425a87af1a441078b910b4065093996",
+    "thread_id": "prompt-e1d7a94a755f4a4ab919aadecf0de331",
     "pausa_verificada": true,
     "decision": false,
     "estado_final": {
-      "huella_nueva": "52a4244f30b7",
-      "huella_activa": "8398be2e5c49",
+      "huella_nueva": "595743c6ac49",
+      "huella_activa": "5751a2d082f5",
       "aprobado": false
     }
   }

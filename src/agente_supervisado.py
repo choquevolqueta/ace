@@ -16,6 +16,7 @@ from langchain_core.tools import tool
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langgraph.checkpoint.memory import InMemorySaver
 from pydantic import BaseModel, Field
+from registro_prompts import obtener_activa
 
 load_dotenv()
 
@@ -304,10 +305,11 @@ if __name__ == "__main__":
     herramientas = [consultar_producto, cotizar_compra, generar_reembolso]
     memoria = InMemorySaver()
 
+    prompt_sistema = obtener_activa()["texto"] + "\n\n" + PROMPT_SISTEMA
     agente = create_agent(
         modelo,
         herramientas,
-        system_prompt=PROMPT_SISTEMA,
+        system_prompt=prompt_sistema,
         checkpointer=memoria,
     )
 
