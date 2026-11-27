@@ -26,3 +26,6 @@ docs/superpowers/
 # Credenciales de servicio (Google Cloud, etc.)
 credenciales.json
 project-*.json
+
+# Estado local (versión activa del prompt, evidencias de ejecución)
+.local/
